@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'index',
-    # 'oauth',
-    # 'account',
+    'account',
+    'oauth',
 ]
 
 MIDDLEWARE = [
@@ -81,14 +82,23 @@ WSGI_APPLICATION = 'cedar.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DJANGO_MYSQL_DATABASE') or 'cedar',
+        'USER': os.environ.get('DJANGO_MYSQL_USER') or 'root',
+        'PASSWORD': os.environ.get('DJANGO_MYSQL_PASSWORD') or 'root',
+        'HOST': os.environ.get('DJANGO_MYSQL_HOST') or '127.0.0.1',
+        'PORT': int(
+            os.environ.get('DJANGO_MYSQL_PORT') or 3306),
+        'OPTIONS': {
+            'charset': 'utf8mb4'},
     }
+    
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+AUTH_USER_MODEL = 'account.BlogUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

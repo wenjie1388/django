@@ -18,6 +18,7 @@ from django.urls import path,re_path,include
 
 urlpatterns = [
     re_path(r'', include('index.urls', namespace='index')),
+    re_path(r'', include('account.urls', namespace='account')),
     re_path(r'', include('oauth.urls', namespace='oauth')),
     # path('admin/', admin.site.urls),
 ]

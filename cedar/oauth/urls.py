@@ -4,5 +4,5 @@ from . import views
 app_name = 'oauth'
 
 urlpatterns = [
-    path('login',)
+    path('user',views.OauthLogin.as_view(),name='oauthlogin')
 ]

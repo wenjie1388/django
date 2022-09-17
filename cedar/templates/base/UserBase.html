@@ -1,0 +1,30 @@
+{% extends 'base/indexbase.html' %}
+
+{% block main %} 
+<div class="container">
+    <div class="row justify-content-md-center" style="width: 100%;margin-left: 0px;margin-right: 0px;">
+        <div class="col col-lg-2">
+            <img src="https://profile.csdnimg.cn/5/8/0/1_qq_41935112" alt="" style="width: 100%;">
+        </div>
+        <div class="col col-md-8">
+            <p> {{ user.username }}的博客 </p>
+            <ul style="display: flex;list-style: none;flex-direction: row;padding: 0;margin: 0;">
+                <li><a href="{% url 'oauth:profile' %}"><b>{{ user.username }}</b>&nbsp;&nbsp;</a></li>
+                <li><a href="{% url 'oauth:profile' %}"><b>ID：{{ user.id }}</b>&nbsp;&nbsp;</a></li>
+                <!-- <li><a href=""><b>{{ user.date_joined }}</b>&nbsp;&nbsp;加入时间</a></li> -->
+                <li><a href="{% url 'oauth:profile' %}"><b>{{ user.email }}</b>&nbsp;&nbsp;</a></li>
+            </ul>
+        </div>
+        <div class="col col-lg-2">
+            <a href="{% url 'oauth:profile' %}">编辑资料</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+{% block UserProfile %}{% endblock %}
+{% block blog %}{% endblock %}
+{% block container %}{% endblock %}
+</div>
+
+{% endblock%}

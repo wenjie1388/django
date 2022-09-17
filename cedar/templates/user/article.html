@@ -1,0 +1,56 @@
+{% extends 'base/indexbase.html' %}
+
+{% block title %} 文章详情 {% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-3">
+            <div class="row">
+                <div class="card border-success mb-3" style="max-width: 18rem;">
+                    <div class="card-header bg-transparent border-success">{{ author.username }}</div>
+                    <div class="card-body text-success">
+                        <h5 class="card-title">{{ author.username }}</h5>
+                        <p class="card-text">个人简介：</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-success">标签</div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-lg-9">
+            <div>
+                <title>title||||<p>{{ article.title }}</p>
+                </title>
+            </div>
+            <div>content <p>{{ article.content}}</p>
+            </div>
+            {% if user.is_authenticated %}
+            <div>
+                <!-- 评论展示 -->
+                {% for comment in comments %}
+                <span>{{ comment.commenter }}</span>&nbsp;<span>在{{ comment.commentdate }}评论说:</span>{{ comment.contents }}
+                    <br>
+                    {% for respon in respons %} 
+                        <span>{{ respon.commener }}在{{ respon.date }}回复{{ respon.to }}说{{ respon.content }}</span>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            <div>
+            <!-- 写评论 -->
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div><input name="" id="" cols="30" rows="10"></input></div>
+                    <div><button type="submit">写评论</button></div>
+                    <div><a href="">点赞</a></div>
+                </form>
+            </div>
+            {% else %}
+            <div>
+                <span>请<a href="{% url 'account:login'  %}">登录</a>后评论/点赞</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

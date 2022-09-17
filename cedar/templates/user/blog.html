@@ -1,0 +1,63 @@
+{% extends 'base/userbase.html' %}
+
+{% block blog %}
+<div class="row">
+    <div class="col-6 col-md-3">
+        <li><a href="{% url 'article:mdeditor' %}">发布</a></li>
+    </div>
+    <!-- 博客文章 -->
+    <div class="col-md-9">
+        <div style="display: flex;list-style: none;flex-direction: row;">
+            <li style="margin: 5px 20px;">最近</li>
+            <li style="margin: 5px 20px;">文章</li>
+            <li style="margin: 5px 20px;">更多</li>
+        </div>
+        <div style="display: flex;flex-wrap: nowrap;text-align: center;">
+            <span style="margin: 5px 20px;">按最后发布时间</span>
+            <span style="margin: 5px 20px;">按访问量排序</span>
+        </div>
+        {% for a in object_list %}
+        <div class="article-item" style="margin: 2px 20px;">
+            <div>
+                <a href="{% url 'articles:article' a.author a.id %}">{{ a.title }}</a>
+                {% if a.is_original %}<span>原创</span>
+                {% else %}<span>转载</span>
+                {% endif %}
+            </div>
+            <div>摘要：Mysql</div>
+            <div style="display: flex;flex-wrap: nowrap;">
+                <div style="margin: 0 20px 20px 0;">
+                    &nbsp;{{ a.createdate }}&nbsp;·</span>
+                </div>
+                <div style="margin: 0 20px 20px 0;">841&nbsp;阅读量&nbsp;· </div>
+                <div style="margin: 0 20px 20px 0;">0&nbsp;点赞&nbsp;·</div>
+                <div style="margin: 0 20px 20px 0;">0&nbsp;评论</div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="pagination">
+            <span class="step-links">
+                <!-- {% if page_obj.has_previous %} -->
+                <a href="?page=1">&laquo; 首页</a>
+                <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+                <!-- {% endif %} -->
+
+                <span class="current">
+                    {% for number in page_obj.paginator %}
+                    <li><span>{{ number.number }}</span></li>
+                    {% endfor %}
+                    <!-- Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. -->
+                </span>
+
+                <!-- {% if page_obj.has_next %} -->
+                <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">最后一页 &raquo;</a>
+                <!-- {% endif %} -->
+            </span>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

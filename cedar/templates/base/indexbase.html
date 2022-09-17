@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}首页{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'bootstrap-4.6.1-dist/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'nav/css/style.css' %}/">
+  {% block style_css %} {% endblock %}
+</head>
+
+<body>
+  <select name="x" id="">
+    <option value="1" name="t">1</option>
+    <option value="2" name="t">2</option>
+  </select>
+  <span>不能相同</span>
+  <select name="x" id="">
+    <option value="1" name="t">1</option>
+    <option value="2" name="t">2</option>
+  </select>
+  <div class="navbar navbar-default" style="border-bottom: 1px solid #dee2e6;">
+    <div class="container">
+      <ul class="nav navbar-nav navbar-list" style="flex-direction: row;">
+        <li><a class="navbar-brand" href="{% url 'account:index' %}">Blog-up</a></li>
+        <!-- <li><input class="hidden" id="toggle-checkbox" type="search" width="100px"></li> -->
+        <li><a class="navbar-brand" href="{% url 'account:index' %}">首页</a></li>
+        {% if user.is_authenticated %}
+        <li><a class="navbar-brand" href="{% url 'article:user' %}">{{ user.username }}</a></li>
+        <li><a class="navbar-brand" href="{% url 'oauth:logout' %}">退出</a></li>
+        {% else %}
+        
+        <li><a class="navbar-brand" href="{% url 'account:login' %}">登陆</a></li>
+        <li><a class="navbar-brand" href="{% url 'account:register' %}">注册</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  
+  {% block index %}{% endblock %}
+  {% block login %}{% endblock %}
+  {% block register %}{% endblock %}
+  {% block userCenter %}{% endblock %}
+  {% block forget %} {% endblock %}
+  {% block userbase %} {% endblock %}
+  {% block main %}{% endblock %}
+
+  {% block footer %}
+  <div class="modal-footer">
+    <address class="text-center">
+      <p>关于博客园 | 联系我们 | 广告服务 | ©2004-2018博客</p>
+      <div href="#">first.last@example.com</div>
+    </address>
+  </div>
+  {% endblock %}
+
+  
+</body>
+
+</html>

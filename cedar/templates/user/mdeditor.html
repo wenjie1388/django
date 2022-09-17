@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap-4.6.1-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'nav/css/style.css' %}/">
+    <title>写文章</title>
+</head>
+
+<body>
+    <main class="container">
+        <form action="{% url 'article:mdeditor' %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <!-- 后退、标题、保存草稿、发布 按钮 -->
+                <div class="col col-lg-2">
+                    <a href="{% url 'article:user' %}">后退</a>
+                </div>
+                <div class="col col-lg-6">
+                </div>
+                <div class="col col-lg-2">
+                    <button type="submit" name="btn-save">保存草稿</button>
+                </div>
+                <div class="col col-lg-2">
+                    <button type="submit"  name="btn-publish">发布</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-11">
+                    {{ form.media }}
+                    {{ form.as_p }}
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+
+</html>

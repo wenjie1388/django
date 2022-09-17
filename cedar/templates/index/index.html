@@ -1,3 +1,74 @@
-{% extends 'base/baseIndex.html' %}
-
-{% block title %} 首页 {% endblock%}
+{% extends 'base/indexbase.html' %}
+{% block title %}首页{% endblock %}
+{% block nav_css %}{% endblock %}
+{% block index %}
+  <div class="container">
+    <div class="row">  
+      <div class="col-sm-9">
+        <div class="blog-list">
+          {% for article in articles %}
+          <div class="blog-list-item clearfix" style="border-bottom: 2px #a5a2a2 solid;margin-bottom: 11px;margin-top: 10px;padding-bottom: 10px;border-top-width: 10px;">
+            <div class="row" style="margin-left: 0px;">
+              <span><a href="{% url 'article:article' article.author article.id %}">{{ article.title }}</a></span>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                  <img src="https://img-blog.csdnimg.cn/619d428416b44f538d3da146bd5c52fc.png?x-oss-process=image/resize,m_fixed,h_300,image/format,png" alt="" style="width: 200px;height: 200px;">
+                </div>
+                <div class="col-9">
+                  <span>前言最近进入了新篇章的学习，Nginx，特写下详细笔记与大家共享。目录前言一、Nginx是什么？二、Nginx的反向代理（扩展：正向代理）三、Nginx的负</span>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+ 
+      <div class="col-sm-3 hidden-xs">
+        <div class="search-bar">
+          <form role="form">
+            <div class="form-group has-feedback">
+              <label class="sr-only" for="Search">Search：</label>
+              <input type="search" class="form-control" placeholder="搜索" id="Search">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </form>
+        </div>
+        <div class="side-bar-card clearfix">
+          <div class="col-xs-5">
+            <img src="image/adver.png">
+          </div>
+          <div class="col-xs-7 side-bar-introduction">
+            <div class="">代码改变世界</div>
+            <div class="side-bar-phone">联系电话：XXXX</div>
+          </div>
+        </div>
+        <div class="side-bar-card side-bar-recommend clearfix">
+          <div class="side-bar-title">推荐阅读</div>
+          <div class="side-bar-body">
+            <div class="side-bar-list">
+              <div class="side-bar-item">
+                <a href="blog.html" class="side-item-title">浅析Django项目优化</a>
+                <div class="side-item-info">10.4k阅读 | 五天前</div>
+              </div>
+              <div class="side-bar-item">
+                <a href="blog.html" class="side-item-title">python解释器</a>
+                <div class="side-item-info">0.4k阅读 | 一小时前</div>
+              </div>
+              <div class="side-bar-item">
+                <a href="blog.html" class="side-item-title">web前段优化策略</a>
+                <div class="side-item-info">2.9k阅读 | 一周前</div>
+              </div>
+              <div class="side-bar-item">
+                <a href="blog.html" class="side-item-title">浅析Django项目优化</a>
+                <div class="side-item-info">1.4k阅读 | 两小时前</div>
+              </div>
+              <div class="side-bar-item">
+                <a href="blog.html" class="side-item-title">浅析Django项目优化</a>
+                <div class="side-item-info">4.1k阅读 | 两天前</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

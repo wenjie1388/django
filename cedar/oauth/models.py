@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.timezone import now
-
+from django.utils.dateparse import parse_datetime
 # Create your models here.
 
 '''
@@ -9,7 +9,9 @@ from django.utils.timezone import now
 class OauthUser(models.Model):
     email = models.EmailField('email', max_length=100,blank=False,null=False)
     password = models.CharField('password',max_length=24,blank=False,null=False)
-    login_time = models.DateTimeField('login_time', default=now)
+    # login_time = models.DateTimeField('login_time', default=now)
+
+    
 
     def __str__(self):
         return self.email

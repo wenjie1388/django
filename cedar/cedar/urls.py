@@ -1,24 +1,24 @@
-"""cedar URL Configuration
+from django.conf import settings
+from django.conf.urls.static import static
+# from django.contrib import admin
+from django.contrib.auth.decorators import login_required
+from django.urls import path, re_path, include
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path,re_path,include
 
 urlpatterns = [
-    re_path(r'', include('index.urls', namespace='index')),
     re_path(r'', include('account.urls', namespace='account')),
+    re_path(r'', include('article.urls', namespace='articles')),
     re_path(r'', include('oauth.urls', namespace='oauth')),
+    # re_path(r'test/', include('testapp.urls')),
+    # re_path(r'', login_required(include('oauth.urls', namespace='oauth'))),
+
+    re_path(r'mdeditor/', include('mdeditor.urls')),
+    path(r'captcha/', include('captcha.urls')),
     # path('admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    ''' 开发时提供静态文件服务,但不适合生产环境，参考：https://docs.djangoproject.com/zh-hans/4.1/howto/static-files/deployment/'''
+    # static files (images, css, javascript, etc.)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
